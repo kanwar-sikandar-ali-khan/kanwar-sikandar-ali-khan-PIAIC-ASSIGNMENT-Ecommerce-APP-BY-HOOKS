@@ -58,7 +58,7 @@ const Cart = () => {
                                         </div>
                                         <span className="col-md-2 " >
                                             <p>INC/DEC</p>
-                                            <h6><BsDashCircle className="mr-2"  onClick={() => dispatch({ type: "dec", payload: v.id })} />{v.quantity}<AiOutlinePlus className="ml-2"  onClick={() => dispatch({ type: "inc", payload: v.id })} /></h6>
+                                            <h6><BsDashCircle className="mr-2" onClick={() => dispatch({ type: "dec", payload: v.id })} />{v.quantity}<AiOutlinePlus className="ml-2" onClick={() => dispatch({ type: "inc", payload: v.id })} /></h6>
 
                                         </span>
                                         <span className="col-md-2">
@@ -130,7 +130,7 @@ const Cart = () => {
 
                     </div>
                 </div>
-            </> : <h1 style={{marginTop:300}} className="text-center">No Item Found</h1>
+            </> : <h1 style={{ marginTop: 300 }} className="text-center">No Item Found</h1>
 
             }
 
