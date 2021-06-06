@@ -12,9 +12,9 @@ const Nav = () => {
 
 
     return (
-        <div className="navcontainer ">
+        <div className="navcontainer  ">
 
-            <div className="container-fluid  ">
+            <div className="container-fluid   ">
                 <div className="row ">
                     <div className=" col-xs-3   ">
                         <ul>

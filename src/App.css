@@ -39,6 +39,11 @@ body{
 .homeBanner{
   background: url('../src/images/banner.webp');
   height: 100vh;
+  /* background-size: contain;
+  background-repeat: no-repeat; */
+  
+
+
 /* 
   background: url('../src/images/banner.webp');
   background-repeat: no-repeat;
@@ -72,6 +77,22 @@ body{
 }
 
 .plusMinus{
-  border: 5px solid black;
+  margin: 10px;
+  font-size: xx-large;
 
 }
+
+
+@media only screen and (min-width: 1200px) {
+
+ 
+}
+
+@media only screen and (min-width: 768px) {
+  .mainCart{
+    ;
+  }
+}
+
+
+

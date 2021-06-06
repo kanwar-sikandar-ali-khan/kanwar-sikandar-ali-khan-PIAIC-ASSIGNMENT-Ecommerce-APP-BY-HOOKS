@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from "react-router-dom"
+import { useParams,useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { BsDashCircle } from 'react-icons/bs';
 import { AiOutlinePlus } from 'react-icons/ai';
@@ -11,6 +11,7 @@ const Details = () => {
     const dispatch = useDispatch();
     const { product } = useSelector(state => state.productReducer)
     const [quantity, setQuantity] = useState(1)
+    const history = useHistory()
 
     useEffect(() => {
 
@@ -20,7 +21,7 @@ const Details = () => {
 
     }, [id])
 
-    
+
     const decquantity = () => {
 
         if (quantity > 1) {
@@ -34,33 +35,37 @@ const Details = () => {
     return (
         <div className="mt-5  ">
             <div className="container mt-5 ">
-                <div className="row ">
-                    <div className="col-md-3 ">
-                        <img src={product.image} alt="" />
+                <div className="row  ">
+                    <div style={{ marginTop: "100px" }} className="col-md-5  text-center ">
+                        <img width="100%" src={product.image} alt="" />
 
                     </div>
 
-                    <div className="col-md-3 offset-md-3 mt-5  ">
+                    <div style={{ fontFamily: "cursive" }} className="col-md-5 offset-md-1 mt-5  text-center  ">
                         <h1>DETAILS</h1>
-                        <div className="bg-success">
-                            {product.name}
-                        </div>
 
-                        <div className="bg-danger">
-                            Price: <span style={{ textDecorationLine: "line-through" }}> ${product.price}.00</span>
-                        </div>
-                        <div className="bg-warning">
-                            discount Price: {product.discountPrice}%
-                    </div>
 
-                        <div>
-                            <span className="plusMinus" onClick={decquantity}><BsDashCircle /></span>
-                            <span style={{ fontSize: "20px" }}>{quantity}</span>
-                            <span className="plusMinus" onClick={() => setQuantity(quantity + 1)}><AiOutlinePlus /></span>
-                        </div>
+
+
+                        <button type="button" class="btn btn-warning m-3">
+                            <h4>{product.name}</h4> <br />
+                            <h4> Price: <span style={{ textDecorationLine: "line-through" }}> ${product.price}.00</span><br /></h4>
+                            <h4>  discount Price: {product.discountPrice}%</h4>
+                        </button>
 
                         <div>
-                            <button className="bg-primary" onClick={() => dispatch({ type: "add-to-cart", payload: { product, quantity } })}>ADD TO CART</button>
+                            <h4>
+                                <span className="plusMinus" onClick={decquantity}><BsDashCircle /></span>
+                                <span style={{ fontSize: "20px" }}>{quantity}</span>
+                                <span className="plusMinus" onClick={() => setQuantity(quantity + 1)}><AiOutlinePlus /></span></h4>
+ 
+                        </div>
+
+                        <div onClick ={()=>{history.push("/cart")}}>
+
+                            <button onClick={() => dispatch({ type: "add-to-cart", payload: { product, quantity } })} type="button" class="btn btn-outline-info">ADD TO CART</button>
+
+
 
                         </div>
 

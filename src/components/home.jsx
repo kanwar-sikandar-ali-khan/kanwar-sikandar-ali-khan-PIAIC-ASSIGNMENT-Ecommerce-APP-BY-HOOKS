@@ -3,34 +3,39 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 
+
 const Home = () => {
     const { products } = useSelector(state => state.productReducer)
     console.log("state=>", products)
     return (
         <div>
-            <div className="conatiner">
-                <div className="row homeBanner ">
+
+            <div className="container-fluid">
+                <div className="row   homeBanner ">
+
                 </div>
-                <div className="row">
+
+            </div>
+
+            <div className="conatiner ">
+
+                <div style={{ width: "100%" }} className="row text-center">
+
                     {products.map((v, i) => {
                         return (
-                            <div className="col-md-3  " key={v.id}>
-                                <div className="col-md-3" >
-                                    <Link to={`/details/${v.id}`}><img src={v.image} alt="" width="300px" /></Link>
-                                </div>
+                            <div className="col-md-3  text-center " key={v.id}>
+
+
+                                <Link to={`/details/${v.id}`}><img className="mt-3" src={v.image} alt="" width='100%' /></Link>
+ 
 
 
 
-                                <div className=" bg-success">
-                                    {v.name}
-                                </div>
-
-                                <div className=" bg-danger">
-                                    Price: ${v.price}.00
-                                        </div>
-                                <div className=" bg-warning">
+                                <button type="button" class="btn btn-warning m-3">
+                                    {v.name}<br />
+                                    Price: ${v.price}.00<br />
                                     discount Price: {v.discountPrice}%
-                                        </div>
+                                </button>
 
 
                             </div>
@@ -38,6 +43,8 @@ const Home = () => {
                     })}
 
                 </div>
+
+
             </div>
 
 

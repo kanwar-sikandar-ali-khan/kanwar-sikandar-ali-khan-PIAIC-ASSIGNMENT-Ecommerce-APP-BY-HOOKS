@@ -12,15 +12,7 @@ const INITIAL_STATE = {
 
     totalQuanties: 0
 
-
-
-
-
 }
-
-
-
-
 
 
 
@@ -42,7 +34,7 @@ export default (state = INITIAL_STATE, action) => {
 
             else {
 
-                const Tprice = state.totalPrice + product.discountPrice * quantity;
+                var Tprice = state.totalPrice + product.discountPrice * quantity;
                 const Tquantities = state.totalQuanties + quantity;
                 product.quantity = quantity;
 
@@ -68,6 +60,19 @@ export default (state = INITIAL_STATE, action) => {
             index = state.products.findIndex(product => product.id === action.payload);
             findPro.quantity += 1;
             state.products[index] = findPro;
+            console.log(findPro)
+
+            var ttt = state.totalPrice + findPro.discountPrice;
+
+            ttt = String(ttt)
+            console.log("ttt",ttt)
+            console.log("ttt", typeof ttt)
+
+            var substr = ttt.substring(0, 4)
+
+            console.log("tttn", substr)
+
+
 
 
 
@@ -75,6 +80,7 @@ export default (state = INITIAL_STATE, action) => {
             return ({
                 ...state,
                 totalPrice: state.totalPrice + findPro.discountPrice,
+                // totalPrice: substr,
                 totalQuanties: state.totalQuanties + 1
 
 
@@ -104,16 +110,16 @@ export default (state = INITIAL_STATE, action) => {
 
             }
 
-            case "remove":
-              
-                findPro = state.products.find(product => product.id === action.payload);
-                const filtered= state.products.filter(product => product.id !== action.payload);
-               return{
-                   ...state,
-                   products:filtered,
-                   totalPrice: state.totalPrice - findPro.discountPrice * findPro.quantity,
-                   totalQuanties:state.totalQuanties-findPro.quantity
-               }
+        case "remove":
+
+            findPro = state.products.find(product => product.id === action.payload);
+            const filtered = state.products.filter(product => product.id !== action.payload);
+            return {
+                ...state,
+                products: filtered,
+                totalPrice: state.totalPrice - findPro.discountPrice * findPro.quantity,
+                totalQuanties: state.totalQuanties - findPro.quantity
+            }
 
 
 

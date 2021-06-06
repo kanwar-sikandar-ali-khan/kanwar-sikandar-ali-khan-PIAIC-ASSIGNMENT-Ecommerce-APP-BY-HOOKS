@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { BsDashCircle } from 'react-icons/bs';
 import { AiOutlinePlus } from 'react-icons/ai';
@@ -10,55 +10,36 @@ import { AiTwotoneDelete } from 'react-icons/ai';
 const Cart = () => {
 
     const { products, totalPrice, totalQuanties } = useSelector(state => state.cartReducer)
- 
+    // const [indivisualTotalPrice,setIndivisualTotalPrice] = useState()
+
+
+    var Tp = String(totalPrice);
+    var Tp = Tp.substring(0, 7);
+    console.log(Tp)
+
 
     const dispatch = useDispatch();
 
     return (
-        <div style={{ marginTop: "100px" }}>
+        <div className="mainCart" style={{ marginTop: "100px" }}>
             {products.length > 0 ? <>
-                <h1>Your Cart</h1>
+                <h1 className="text-center">Your Cart</h1>
 
                 <div className="container-fluid mt-5  ">
                     <div className="row ">
 
                         <div className="col-md-9 ">
 
-                            {/* i have used it but it have troubles on small screen thats why i wrote indivisual below  */}
-
-                            {/* <div className="row">
-
-                                <div className="col-md-2 ">
-                                    Picture
-
-                            </div>
-                                <div className="col-md-2 ">
-                                    Name
-
-                            </div>
-
-                                <div className="col-md-2 ">
-
-                                    Price
-
-                            </div>
-                                <div className="col-md-2 ">
-                                    Inc/Dec
-
-                            </div>
-                                <div className="col-md-2 ">
-                                    Total Price
-
-                            </div>
-                                <div className="col-md-2 ">
-                                    Remove
-
-                            </div>
-
-                            </div> */}
 
 
                             {products.map((v, i) => {
+                                //  setIndivisualTotalPrice(v.discountPrice * v.quantity)
+                                let IndivisualTotalPrice = v.discountPrice * v.quantity
+
+                                IndivisualTotalPrice = String(IndivisualTotalPrice)
+
+                                IndivisualTotalPrice = IndivisualTotalPrice.substring(0, 7);
+
                                 return (
                                     <div className="row" key={v.id}>
                                         <div className="col-md-2">
@@ -68,21 +49,24 @@ const Cart = () => {
 
                                         <div className="col-md-2">
                                             <p>NAME</p>
-                                            <h2>{v.name}</h2>
+                                            <p>{v.name}</p>
                                         </div>
                                         <div className="col-md-2">
                                             <p>PRICE</p>
-                                            <h2>${v.discountPrice}</h2>
+                                            <p>${v.discountPrice}</p>
 
                                         </div>
                                         <span className="col-md-2 " >
                                             <p>INC/DEC</p>
-                                            <BsDashCircle onClick={() => dispatch({ type: "dec", payload: v.id })} />{v.quantity}<AiOutlinePlus onClick={() => dispatch({ type: "inc", payload: v.id })} />
+                                            <h6><BsDashCircle className="mr-2"  onClick={() => dispatch({ type: "dec", payload: v.id })} />{v.quantity}<AiOutlinePlus className="ml-2"  onClick={() => dispatch({ type: "inc", payload: v.id })} /></h6>
 
                                         </span>
                                         <span className="col-md-2">
                                             <p>TOTAL PRICE</p>
-                                            <h2>${v.discountPrice * v.quantity}</h2>
+
+                                            {/* <p>${v.discountPrice * v.quantity}</p> */}
+
+                                            <p>${IndivisualTotalPrice}</p>
 
                                         </span>
 
@@ -90,10 +74,27 @@ const Cart = () => {
                                         <span className="col-md-2">
                                             <p>REMOVE</p>
 
-                                            <AiTwotoneDelete onClick={() => dispatch({ type: "remove", payload: v.id })} />
+                                            <h4><AiTwotoneDelete onClick={() => dispatch({ type: "remove", payload: v.id })} /></h4>
 
 
                                         </span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                     </div>
                                 )
@@ -104,14 +105,16 @@ const Cart = () => {
 
 
 
+
+
                         </div>
 
                         <div className="col-md-3 ">
 
-                            <h2>Summary</h2>
+                            <p>Summary</p>
 
                             <h1>Total Items:{totalQuanties}</h1>
-                            <h1>Total Price: ${totalPrice}</h1>
+                            <h1>Total Price: ${Tp}</h1>
                             <button style={{ width: "100px" }} type="button" class="btn btn-info">CHECK OUT</button>
 
 
@@ -127,7 +130,7 @@ const Cart = () => {
 
                     </div>
                 </div>
-            </> : <h1 className="mt-5">no item found</h1>
+            </> : <h1 style={{marginTop:300}} className="text-center">No Item Found</h1>
 
             }
 
@@ -141,4 +144,4 @@ const Cart = () => {
     )
 }
 
-export default Cart 
+export default Cart
